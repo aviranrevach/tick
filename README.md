@@ -1,57 +1,73 @@
-# Countdown Bar – macOS menu bar countdown
+# Tick
 
-A small app that sits in the **macOS menu bar** and shows a countdown to a date, e.g.:
+A minimal macOS menu bar app that counts down to anything.
 
-**Jon's Birthday  15d 19h 30m**
+```
+🎂Birthday  11d:8h:25m
+```
 
-No Xcode required — it’s a **Python** app using [rumps](https://github.com/jaredks/rumps).
-
-## Requirements
-
-- **macOS** (tested on Ventura and later)
-- **Python 3.8+**
-- **rumps** (and its dependency PyObjC)
-
-## Setup and run
-
-1. **Install dependencies** (once):
-
-   ```bash
-   cd "Desktop counter"
-   pip3 install -r requirements.txt
-   ```
-
-   Or:
-
-   ```bash
-   pip3 install rumps
-   ```
-
-2. **Run the app**:
-
-   ```bash
-   python3 countdown_bar.py
-   ```
-
-   The countdown will appear in the **menu bar** (top right). The app does not show in the Dock.
-
-## Usage
-
-- **Click the menu bar text** to open the menu (Settings, Quit).
-- **Settings…** opens a window where you can:
-  - Set the **event name** (e.g. `Jon's Birthday`).
-  - Set the **date and time** to count down to (format: `YYYY-MM-DD HH:MM`).
-- The countdown in the menu bar **updates every minute**.
-- Your event name and target date are saved in **`~/.countdown_bar_config.json`** and persist between runs.
-
-## Run at login (optional)
-
-To start Countdown Bar when you log in:
-
-1. Open **System Settings → General → Login Items**.
-2. Click **+** and add **Terminal** (or **iTerm**, etc.).
-3. Or create a small wrapper that runs `python3 /path/to/countdown_bar.py` and add that as a login item (e.g. with **Automator** or **launchd**).
+No Dock icon. No notifications. Just a quiet pill in your menu bar, ticking toward the moment that matters.
 
 ---
 
-There is also a **Swift/SwiftUI** version in the `CountdownBar/` folder; that one requires Xcode to build.
+## Features
+
+- **Countdown to date** — pick any date and time, watch it approach
+- **Duration timer** — set hours and minutes, starts counting the moment you hit Save
+- **Four display styles**
+  - `Standard` — `11d:8h:25m`
+  - `Percentage` — `67%`
+  - `Progress bar` — `██████░░░░ 67%`
+  - `Natural` — `in 5 days` / `tomorrow` / `in 3 hours` / `soon`
+- **Granularity control** — show days only, days+hours, all three, or just minutes
+- **Compact or verbose** — `5d 3h` vs `5 days 3 hours`
+- **Blinking dots** — separator colons tick every second when enabled
+- **Emoji support** — quick-pick tray or open the system emoji picker
+- **Pill-shaped display** — rendered as a native image with fill and inner shadow
+- **Native settings window** — built with PyObjC/AppKit, no Electron, no web views
+
+---
+
+## Requirements
+
+- macOS Ventura or later
+- Python 3.8+
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/aviranrevach/tick
+cd tick
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 countdown_bar.py
+```
+
+Tick will appear in your menu bar. Click it → **Settings…** to configure.
+
+---
+
+## Run at login
+
+Create a shell script:
+
+```bash
+#!/bin/bash
+cd /path/to/tick
+.venv/bin/python countdown_bar.py
+```
+
+Then add it as a Login Item in **System Settings → General → Login Items**.
+
+---
+
+## Config
+
+Settings are saved to `~/.countdown_bar_config.json` and persist between runs.
+
+---
+
+Built with [rumps](https://github.com/jaredks/rumps) and PyObjC.
