@@ -2,9 +2,8 @@
 
 A minimal macOS menu bar app that counts down to anything.
 
-```
-🎂Birthday  11d:8h:25m
-```
+![Tick in the menu bar](assets/preview.png)
+*⭐️Birthday — 10 days, 7 hours, 18 minutes away*
 
 No Dock icon. No notifications. Just a quiet pill in your menu bar, ticking toward the moment that matters.
 
